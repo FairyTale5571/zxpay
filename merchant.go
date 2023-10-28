@@ -5,8 +5,6 @@ import (
 	"fmt"
 	"net/http"
 	"net/url"
-
-	"github.com/fairytale5571/zxPay/utils/helpers"
 )
 
 type MerchantRepository interface {
@@ -21,7 +19,7 @@ func (z *zxPay) GetBalance(tickers ...string) (AccountBalances, error) {
 	if len(tickers) < 1 {
 		return nil, ErrorTickerArrayEmpty
 	}
-	query := helpers.SplitArray(tickers)
+	query := SplitArray(tickers)
 	u, e := url.Parse(fmt.Sprintf("%s%s", ZxAPIBaseURL, "/merchants/balances"))
 	if e != nil {
 		fmt.Errorf("%w", e)
