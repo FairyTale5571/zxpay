@@ -30,7 +30,7 @@ func main() {
 	}
 	fmt.Println(crypto)
 
-	router := gin.New()
+	router := gin.Default()
 	router.Any("/", handler)
 	router.Run(":3000")
 

@@ -5,8 +5,11 @@ type ErrorCode int
 type InvoicesCode int
 
 const (
-	CodeFutureRequest    ErrorCode = -3
+	// CodeFutureRequest - Future request
+	CodeFutureRequest ErrorCode = -3
+	// CodeSignatureExpired - Signature expired
 	CodeSignatureExpired ErrorCode = -2
+	// CodeInvalidSignature - Invalid signature
 	CodeInvalidSignature ErrorCode = -1
 
 	// CodeLocalIDAlreadyPlaced - Local id already placed
@@ -48,6 +51,6 @@ type APIError struct {
 	StatusCode  string `json:"status_code,omitempty"`
 }
 
-func (e APIError) Error() string {
+func (e *APIError) Error() string {
 	return e.Description
 }

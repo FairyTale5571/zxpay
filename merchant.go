@@ -7,14 +7,8 @@ import (
 	"net/url"
 )
 
-type MerchantRepository interface {
-	GetBalance(tickers ...string) (AccountBalances, error)
-	GetCryptoBalance() (AccountBalances, error)
-	GetFiatBalance() (AccountBalances, error)
-}
-
 // GetBalance return all balance from merchant
-func (z *zxPay) GetBalance(tickers ...string) (AccountBalances, error) {
+func (z *ZxPay) GetBalance(tickers ...string) (AccountBalances, error) {
 	var res AccountBalances
 	if len(tickers) < 1 {
 		return nil, ErrorTickerArrayEmpty
@@ -39,7 +33,7 @@ func (z *zxPay) GetBalance(tickers ...string) (AccountBalances, error) {
 }
 
 // GetFiatBalance return fiat balance from merchant
-func (z *zxPay) GetFiatBalance() (AccountBalances, error) {
+func (z *ZxPay) GetFiatBalance() (AccountBalances, error) {
 	listFiat, err := z.GetListFiatAssets()
 	if err != nil {
 		return nil, err
@@ -49,7 +43,7 @@ func (z *zxPay) GetFiatBalance() (AccountBalances, error) {
 }
 
 // GetCryptoBalance return crypto balance from merchant
-func (z *zxPay) GetCryptoBalance() (AccountBalances, error) {
+func (z *ZxPay) GetCryptoBalance() (AccountBalances, error) {
 	listCrypto, err := z.GetListCryptoAssets()
 	if err != nil {
 		return nil, err

@@ -7,13 +7,8 @@ import (
 	"net/url"
 )
 
-type FiatRepository interface {
-	GetListFiatAssets() (AssetsInformation, error)
-	GetFiatFee(amount float64, ticker string) (*Fee, error)
-}
-
 // GetListFiatAssets return all available fiat information
-func (z *zxPay) GetListFiatAssets() (AssetsInformation, error) {
+func (z *ZxPay) GetListFiatAssets() (AssetsInformation, error) {
 	u, _ := url.Parse(fmt.Sprintf("%s%s", ZxAPIBaseURL, "/merchants/withdrawals/fiat/assets"))
 	req, err := z.do(http.MethodGet, u)
 	if err != nil {
@@ -27,7 +22,7 @@ func (z *zxPay) GetListFiatAssets() (AssetsInformation, error) {
 }
 
 // GetFiatFee return fee value for fiat currency
-func (z *zxPay) GetFiatFee(amount float64, ticker string) (*Fee, error) {
+func (z *ZxPay) GetFiatFee(amount float64, ticker string) (*Fee, error) {
 
 	listFiat, err := z.GetListFiatAssets()
 	if err != nil {

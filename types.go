@@ -115,3 +115,7 @@ type AmountInvoice struct {
 	// BaseAmount
 	BaseAmount TickerInformation `json:"baseAmount"`
 }
+
+// Target target
+type Target struct {
+}

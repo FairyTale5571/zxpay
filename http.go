@@ -13,7 +13,7 @@ import (
 	"time"
 )
 
-func (z *zxPay) do(method string, path *url.URL, body ...interface{}) (*http.Response, error) {
+func (z *ZxPay) do(method string, path *url.URL, body ...interface{}) (*http.Response, error) {
 	var req *http.Request
 	var client = &http.Client{Timeout: time.Second * 10}
 	var err error
@@ -57,7 +57,7 @@ func (z *zxPay) do(method string, path *url.URL, body ...interface{}) (*http.Res
 	return response, nil
 }
 
-func (z *zxPay) generateSignature(method, url, body string, timestamp int64) string {
+func (z *ZxPay) generateSignature(method, url, body string, timestamp int64) string {
 	s := fmt.Sprintf("%s%s%s%d", method, url, body, timestamp)
 	h := hmac.New(crypto.SHA256.New, []byte(z.privateKey))
 	_, err := h.Write([]byte(s))

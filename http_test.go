@@ -28,7 +28,7 @@ func Test_zxPay_generateSignature(t *testing.T) {
 			want: "87d373924738e85fbd13b4a9932276e894eaea4ac46092464199ca1713dea306",
 		},
 	}
-	z := &zxPay{
+	z := &ZxPay{
 		privateKey: "123",
 	}
 	for _, tt := range tests {

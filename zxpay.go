@@ -17,62 +17,60 @@ const (
 	// ZxAPIEndpointWithdrawalCrypto is the endpoint for crypto withdrawals
 	ZxAPIEndpointWithdrawalCrypto = ZxAPIEndpointWithdrawals + "/crypto"
 
-	// ZxAPIEndpointWithdrawalCrypto is the endpoint for crypto withdrawals
+	// ZxAPIEndpointWithdrawalFiat is the endpoint for fiat withdrawals
 	ZxAPIEndpointWithdrawalFiat = ZxAPIEndpointWithdrawals + "/fiat"
 
 	// ZxAPIEndpointWithdrawalCryptoFee is the endpoint for crypto withdrawal fees
 	ZxAPIEndpointWithdrawalCryptoFee = ZxAPIEndpointWithdrawalCrypto + "/fee"
 
-	// ZxAPIEndpointInvoices
+	// ZxAPIEndpointInvoices is the endpoint for invoices
 	ZxAPIEndpointInvoices = ZxAPIEndpointMerchants + "/invoices"
 
-	// ZxAPIEndpointInvoicesCrypto
+	// ZxAPIEndpointInvoicesCrypto is the endpoint for crypto invoices
 	ZxAPIEndpointInvoicesCrypto = ZxAPIEndpointInvoices + "/crypto"
 
-	//ZxAPIEndpointInvoicesCryptoForm
+	// ZxAPIEndpointInvoicesCryptoForm is the endpoint for crypto invoices form
 	ZxAPIEndpointInvoicesCryptoForm = ZxAPIEndpointInvoicesCrypto + "/form"
 
-	// ZxAPIEndpointInvoicesFiat
+	// ZxAPIEndpointInvoicesFiat is the endpoint for fiat invoices
 	ZxAPIEndpointInvoicesFiat = ZxAPIEndpointInvoices + "/fiat"
 
-	// ZxAPIEndpointInvoicesFiatForm
+	// ZxAPIEndpointInvoicesFiatForm is the endpoint for fiat invoices form
 	ZxAPIEndpointInvoicesFiatForm = ZxAPIEndpointInvoicesFiat + "/form"
 
-	// ZxAPIEndpointExchange
+	// ZxAPIEndpointExchange is the endpoint for exchange
 	ZxAPIEndpointExchange = ZxAPIEndpointMerchants + "/exchange"
-	// ZxAPIEndpointExchangeEstimate
+
+	// ZxAPIEndpointExchangeEstimate is the endpoint for exchange estimate
 	ZxAPIEndpointExchangeEstimate = ZxAPIEndpointExchange + "/estimate"
-	// ZxAPIEndpointExchangeDirections
+
+	// ZxAPIEndpointExchangeDirections is the endpoint for exchange directions
 	ZxAPIEndpointExchangeDirections = ZxAPIEndpointExchange + "/available-directions"
 
-	ZxAPIEndpointFiatAssets   = ZxAPIEndpointMerchants + "/assets/fiat"
+	// ZxAPIEndpointFiatAssets is the endpoint for fiat assets
+	ZxAPIEndpointFiatAssets = ZxAPIEndpointMerchants + "/assets/fiat"
+
+	// ZxAPIEndpointCryptoAssets is the endpoint for crypto assets
 	ZxAPIEndpointCryptoAssets = ZxAPIEndpointMerchants + "/assets/crypto"
 )
 
-type Provider interface {
-	MerchantRepository
-	FiatRepository
-	CryptoRepository
-}
-
-type zxPay struct {
+type ZxPay struct {
 	merchantID string
 	privateKey string
 	url        string
 	signature  string
 }
 
-func New(merchantID, privateKey string) Provider {
-	return &zxPay{
+func New(merchantID, privateKey string, opts ...Options) *ZxPay {
+	return &ZxPay{
 		merchantID: merchantID,
 		privateKey: privateKey,
 	}
 }
 
-type Options struct {
-}
+type Options struct{}
 
-// VerifyNotification verifies a notification signature
-func (z *zxPay) Validate(op ...Options) (bool, error) {
+// Validate verifies a notification signature
+func (z *ZxPay) Validate(op ...Options) (bool, error) {
 	return true, nil
 }
